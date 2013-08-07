@@ -12,7 +12,7 @@
 # The queries that you can pass to this plugin *resemble* but do not
 # completely match queries that you can give fs_cli (in the -x argument)
 # The reason for this is that those queries sometimes spit back too
-# much data to process in one Nagios check. Additionally, they've all been
+# much data to process in one Nagios check. Additionally, they're all
 # transformed to hyphenated versions in order not to trip up NRPE.
 #
 # Checks that you can run currently and what type of results to expect:
@@ -22,12 +22,12 @@
 #       alert on it. See Nagios Thresholds for more info:
 #       http://nagiosplug.sourceforge.net/developer-guidelines.html#THRESHOLDFORMAT
 #       This check also returns # of calls as performance data.
-#  sofia status external - looks for the 'external' Name and expects to
+#  sofia-status-external - looks for the 'external' Name and expects to
 #       find a state of RUNNING. Same format as the 'internal' test above.
-#  show calls count - reports total # of current calls.
-#  sofia status profile internal failed-calls-in - reports the FAILED-CALLS-IN
+#  show-calls-count - reports total # of current calls.
+#  sofia-status-profile-internal-failed-calls-in - reports the FAILED-CALLS-IN
 #       parameter in the 'sofia status profile internal' query.
-#  sofia status profile internal failed-calls-out - reports the FAILED-CALLS-OUT
+#  sofia-status-profile-internal-failed-calls-out - reports the FAILED-CALLS-OUT
 #       parameter in the 'sofia status profile internal' query.
 #
 # Remember to modify the $fs_cli_location variable below to suit your install.
@@ -41,12 +41,21 @@
 use strict;
 use warnings;
 
+# Look for 'feature' pragma, otherwise use Switch module
+eval {
+  # require feature 'switch';
+  require feature;
+  feature->import();
+};
+unless($@) {
+  use Switch 'Perl6';
+}
+
 use Nagios::Plugin;
-use feature 'switch';
 
 # use vars qw($VERSION $PROGNAME $result);
 our ( $VERSION, $PROGNAME, $result, $rawdata );
-$VERSION = '0.2';
+$VERSION = '0.5';
 
 # get the base name of this script for use in the examples
 use File::Basename;
