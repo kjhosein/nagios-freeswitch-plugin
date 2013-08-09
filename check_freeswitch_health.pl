@@ -8,8 +8,13 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+# Many thanks to Ton Voon for writing the Nagios::Plugin Perl module
+#   http://search.cpan.org/~tonvoon/Nagios-Plugin-0.36/
 #
-# The queries that you can pass to this plugin *resemble* but do not
+# Remember to modify the $fs_cli_location variable below to suit your install.
+#
+# The queries that you can pass to this plugin *resemble* but *do not*
 # completely match queries that you can give fs_cli (in the -x argument)
 # The reason for this is that those queries sometimes spit back too
 # much data to process in one Nagios check. Additionally, they're all
@@ -30,18 +35,19 @@
 #  sofia-status-profile-internal-failed-calls-out - reports the FAILED-CALLS-OUT
 #       parameter in the 'sofia status profile internal' query.
 #
-# Remember to modify the $fs_cli_location variable below to suit your install.
 
 # TO DO IN FUTURE VERSIONS:
-# 1. Include an option (like -a) to list all allowed queries.
+# 1. Include an option (perhaps -a) to list all allowed queries.
 # 2. (DONE) Remove excess whitespace from $rawdata
 # 3. Refine the use of the $perfdatatitle (better logic on selecting the title)
+# 4. Look for fs_cli, and report back via cmd line output and perfdata if can't find
+
 
 # I. Prologue
 use strict;
 use warnings;
 
-# Look for 'feature' pragma, otherwise use Switch module
+# Look for 'feature' pragma (Perl 5.10+), otherwise use Switch module (Perl 5.8)
 eval {
   # require feature 'switch';
   require feature;
