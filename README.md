@@ -48,3 +48,4 @@ Thanks to Ton Voon for his [Nagios::Plugin Perl module](http://search.cpan.org/~
 Thanks also to:
 * Nathan Vonnahme for his presentation Writing Custom Nagios Plugins In Perl. [Available on SlideShare](http://www.slideshare.net/nagiosinc/nagios-conference-2011-nathan-vonnahme-writing-custom-nagios-plugins-in-perl).
 * Jose Luis Martinez for his presentation on Writing Perl Nagios Plugins. [PDF](http://www.pplusdomain.net/Writing%20Nagios%20Plugins%20in%20Perl.pdf)
+
