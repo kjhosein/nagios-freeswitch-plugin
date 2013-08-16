@@ -236,6 +236,7 @@ given ( $query ) {
 
 }
 
+
 # VI. Performance Data gathering
 
 my $threshold = $p->set_thresholds(
