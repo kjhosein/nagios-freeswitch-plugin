@@ -1,6 +1,6 @@
 # Nagios plugin for checking various parameters on a FreeSWITCH system
 
-`check_freeswitch_health.pl` is a plugin for Nagios that checks various health parameters on a FreeSWITCH server. It takes advantage of the fs_cli FreeSWITCH command-line tool. 
+`check_freeswitch_health.pl` is a plugin for Nagios that checks various health parameters on a FreeSWITCH server. It takes advantage of the `fs_cli` FreeSWITCH command-line tool. It may be extended to check practically anything that fs_cli can check.
 
 ## License
 
@@ -13,7 +13,7 @@ This Source Code Form is subject to the terms of the Mozilla Public License, v. 
 Sample nrpe.cfg command line:
 `command[check_freeswitch_health]=/usr/lib64/nagios/plugins/check_freeswitch_health.pl $ARG1$`
 
-And on the Nagios server, corresponding commands and services may be:
+and on the Nagios server, corresponding commands and services may be:
 ```
   define command {
     command_name    check_freeswitch_health
