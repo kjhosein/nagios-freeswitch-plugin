@@ -2,7 +2,7 @@
 
 # check_freeswitch_health.pl
 #
-# Written by Khalid J Hosein, Platform28
+# Written by Khalid J Hosein, Platform28, http://platform28.com
 # July 2013
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
@@ -17,8 +17,11 @@
 # The queries that you can pass to this plugin *resemble* but *do not*
 # completely match queries that you can give fs_cli (in the -x argument)
 # The reason for this is that those queries sometimes spit back too
-# much data to process in one Nagios check. Additionally, they're all
-# transformed to hyphenated versions in order not to trip up NRPE.
+# much data to process in one Nagios check. Additionally, they've all
+# been transformed to hyphenated versions in order not to trip up NRPE.
+#
+# Note that since it's less complicated for Nagios to deal with one check at a 
+# time, this script only accepts one (1) -q query.
 #
 # Checks that you can run currently and what type of results to expect:
 #  sofia-status-internal - looks for the 'internal' Name and expects to
@@ -37,10 +40,12 @@
 #
 
 # TO DO IN FUTURE VERSIONS:
-# 1. Include an option (perhaps -a) to list all allowed queries.
+# 1. (DONE) Include an option (perhaps -a) to list all allowed queries.
+#       Decided to refer the user back to the docs in the comments.
 # 2. (DONE) Remove excess whitespace from $rawdata
 # 3. Refine the use of the $perfdatatitle (better logic on selecting the title)
 # 4. Look for fs_cli, and report back via cmd line output and perfdata if can't find
+
 
 
 # I. Prologue
@@ -94,9 +99,12 @@ my $p = Nagios::Plugin->new(
        [ -c|--critical=threshold that generates a Nagios critical warning ]
        [ -f|--perfdatatitle=title for Nagios Performance Data. 
                             Note: don't use spaces. ]
+
+       See the documentation in this script's comments for accepted queries.
+       For example, you can run 'head -n 50 check_freeswitch_health.pl'
        ",
     version => $VERSION,
-    blurb   => "Uses the FreeSWITCH fs_cli command to perform checks.",
+    blurb   => "This plugin requires the FreeSWITCH fs_cli command to perform checks.",
     extra   => qq(
     An example query:   
     ./check_freeswitch_health.pl -q show-calls-count -w 100 -c 150 -f Total_Calls
@@ -111,30 +119,30 @@ $p->add_arg(
     spec     => 'query|q=s',
     required => 1,
     help     => "-q, --query=STRING
-                What check to run. E.g. show-calls-count, sofia-status-internal, etc. 
-                REQUIRED."
+    What check to run. E.g. show-calls-count, sofia-status-internal, etc. 
+    REQUIRED."
 );
 
 $p->add_arg(
     spec => 'warning|w=s',
     help => "-w, --warning=INTEGER:INTEGER
-            Minimum and maximum number of allowable result, outside of which a
-            warning will be generated. If omitted, no warning is generated."
+    Minimum and maximum number of allowable result, outside of which a
+    warning will be generated. If omitted, no warning is generated."
 );
 
 $p->add_arg(
     spec => 'critical|c=s',
     help => "-c, --critical=INTEGER:INTEGER
-            Minimum and maximum number of allowable result, outside of which a
-            an alert will be generated.  If omitted, no alert is generated."
+    Minimum and maximum number of allowable result, outside of which a
+    an alert will be generated.  If omitted, no alert is generated."
 );
 
 $p->add_arg(
     spec     => 'perfdatatitle|f=s',
     required => 0,
     help     => "-f, --perfdatatitle=STRING
-                If you want to collect Nagios Performance Data, you may
-                give the check an appropriate name. OPTIONAL"
+    If you want to collect Nagios Performance Data, you may
+    give the check an appropriate name. OPTIONAL"
 );
 
 # Parse arguments and process standard ones (e.g. usage, help, version)

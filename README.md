@@ -36,8 +36,6 @@ Written July 2013
 
 ## To Do
 
-- [ ] Include an option (perhaps -a) to list all allowed queries.
-- [x] Remove excess whitespace from $rawdata
 - [ ] Refine the use of the $perfdatatitle (better logic on selecting the title)
 - [ ] First check for the fs_cli command, and report back via cmd line output and perfdata if can't find
 
