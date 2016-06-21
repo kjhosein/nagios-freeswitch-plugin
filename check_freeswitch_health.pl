@@ -73,7 +73,7 @@ use File::Basename;
 $PROGNAME = basename( $0 );
 
 # Fully qualified path to fs_cli. Modify this to suit:
-my $fs_cli_location = "/usr/local/bin/fs_cli";
+my $fs_cli_location = "/usr/bin/fs_cli";
 
 # Declare some vars
 my @fs_cli_output;
@@ -84,6 +84,7 @@ my $label2;
 # Currently processed fs_cli queries:
 my @allowed_checks = (
     "show-calls-count",
+    "show-registrations-count",
     "sofia-status-internal",
     "sofia-status-external",
     "sofia-status-profile-internal-failed-calls-in",
@@ -242,6 +243,17 @@ given ( $query ) {
         }
     }
 
+    when ( "show-registrations-count" ) {
+        @fs_cli_output = `$fs_cli_location -x "show registrations"`;
+        foreach ( @fs_cli_output ) {
+            if ( /total/i ) {
+                my @temp = split( /\s+/, $_ );
+                $rawdata = $_;
+                $result  = $temp[0];
+                last;
+            }
+        }
+    }
 }
 
 
