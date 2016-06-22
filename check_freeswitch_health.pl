@@ -37,6 +37,7 @@
 #       parameter in the 'sofia status profile internal' query.
 #  sofia-status-profile-internal-failed-calls-out - reports the FAILED-CALLS-OUT
 #       parameter in the 'sofia status profile internal' query.
+# show-registrations-count - reports total # of current registartions.
 #
 
 # TO DO IN FUTURE VERSIONS:
