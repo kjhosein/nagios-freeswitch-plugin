@@ -63,7 +63,7 @@ unless($@) {
   use Switch 'Perl6';
 }
 
-use Nagios::Plugin;
+use Nagios::Monitoring::Plugin;
 
 # use vars qw($VERSION $PROGNAME $result);
 our ( $VERSION, $PROGNAME, $result, $rawdata );
