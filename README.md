@@ -2,6 +2,11 @@
 
 `check_freeswitch_health.pl` is a plugin for Nagios that checks various health parameters on a FreeSWITCH server. It takes advantage of the `fs_cli` FreeSWITCH command-line tool. It may be extended to check practically anything that fs_cli can check.
 
+## This Version
+
+This version of the plugin, which exists only on this branch, is for Sangoma NSG devices. 
+Thanks to user [richilp](https://github.com/richilp) who submitted this via [issue #4](https://github.com/kjhosein/nagios-freeswitch-plugin/issues/4).
+
 ## License
 
 This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
