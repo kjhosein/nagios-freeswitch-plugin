@@ -2,15 +2,17 @@
 
 # check_freeswitch_health.pl
 #
-# Written by Khalid J Hosein, Platform28, http://platform28.com
+# Written by Khalid J Hosein, kjh@pobox.com
 # July 2013
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-# Many thanks to Ton Voon for writing the Nagios::Plugin Perl module
+# Many thanks to Ton Voon for writing the original Nagios::Plugin Perl module
 #   http://search.cpan.org/~tonvoon/Nagios-Plugin-0.36/
+# New plugin maintained by Nagios Plugin dev team: Nagios::Monitoring::Plugin
+#   https://metacpan.org/pod/Nagios::Monitoring::Plugin
 #
 # Remember to modify the $fs_cli_location variable below to suit your install.
 #
@@ -93,7 +95,7 @@ my @allowed_checks = (
 );
 
 # II. Usage/Help
-my $p = Nagios::Plugin->new(
+my $p = Nagios::Monitoring::Plugin->new(
     usage => "Usage: %s 
        [ -q|--query=These are mapped to specific fs_cli -x checks
                     e.g. show-calls-count is mapped to 'show calls count'
