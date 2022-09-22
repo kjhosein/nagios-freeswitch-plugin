@@ -9,7 +9,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-# Many thanks to Ton Voon for writing the Nagios::Plugin Perl module
+# Many thanks to Ton Voon for writing the Monitoring::Plugin Perl module
 #   http://search.cpan.org/~tonvoon/Nagios-Plugin-0.36/
 #
 # Remember to modify the $fs_cli_location variable below to suit your install.
@@ -63,7 +63,7 @@ unless($@) {
   use Switch 'Perl6';
 }
 
-use Nagios::Plugin;
+use Monitoring::Plugin;
 
 # use vars qw($VERSION $PROGNAME $result);
 our ( $VERSION, $PROGNAME, $result, $rawdata );
@@ -93,7 +93,7 @@ my @allowed_checks = (
 );
 
 # II. Usage/Help
-my $p = Nagios::Plugin->new(
+my $p = Monitoring::Plugin->new(
     usage => "Usage: %s 
        [ -q|--query=These are mapped to specific fs_cli -x checks
                     e.g. show-calls-count is mapped to 'show calls count'
